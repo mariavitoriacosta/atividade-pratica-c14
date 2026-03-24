@@ -1,0 +1,31 @@
+name: Python Tests
+
+on: # define qnd a pipeline sera executada
+  push:
+    branches: [ "main" ] # sera executada apenas qnd algo for commitado para a main
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test: # um job com nome test (por enquanto apenas um job pois o projeto é simples
+    runs-on: ubuntu-latest # define o sistema operacional da maquina virtual
+
+    steps:
+      - name: Baixar código do repositório
+        uses: actions/checkout@v4 # esse comando baixa o projeto na maquina virtual
+
+      - name: Configurar Python
+        uses: actions/setup-python@v6 # esse comando instala/configura a versao do python desejada
+        with:
+          python-version: "3.11"
+          cache: "pip" # ativa o cache de dependencias do pip
+
+      - name: Instalar dependências # atualiza o pip pra evitar problemas de versões / instala as dependencias no requt
+        run: |
+          python -m pip install --upgrade pip 
+          pip install -r requirements.txt
+
+      - name: Rodar testes
+        run: pytest -v
+
+        # roda os teste
