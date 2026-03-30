@@ -24,8 +24,17 @@ jobs:
         run: |
           python -m pip install --upgrade pip 
           pip install -r requirements.txt
+      
+      - name: Criar pasta de relatórios
+        run: mkdir -p reports
 
-      - name: Rodar testes
-        run: pytest -v
-
+      - name: Rodar testes e gerar relatório
+        run: pytest -v --junitxml=reports/test-results.xml
         # roda os teste
+
+      - name: Salvar relatório de testes como artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report
+          path: reports/test-results.xml
