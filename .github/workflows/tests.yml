@@ -8,6 +8,7 @@ on: # define qnd a pipeline sera executada
 
 jobs:
   test: # um job com nome test (por enquanto apenas um job pois o projeto é simples
+    name: Test
     runs-on: ubuntu-latest # define o sistema operacional da maquina virtual
 
     steps:
@@ -38,7 +39,7 @@ jobs:
         with:
           name: test-report
           path: reports/test-results.xml
-    
+
   build:
     name: Build
     runs-on: ubuntu-latest
