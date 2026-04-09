@@ -4,7 +4,7 @@
 ![CI](https://img.shields.io/badge/CI-GitHub%20Actions-success)
 ![Status](https://img.shields.io/badge/status-em%20desenvolvimento-yellow)
 
-Projeto desenvolvido na disciplina de Engenharia de Software com o objetivo de aplicar conceitos de testes automatizados e CI/CD.
+Projeto desenvolvido na disciplina de Engenharia de Software com o objetivo de aplicar conceitos de testes automatizados, build e CI/CD.
 
 ---
 
@@ -19,11 +19,16 @@ Projeto desenvolvido na disciplina de Engenharia de Software com o objetivo de a
 
 ## Estrutura do projeto
 
-```
+```text
 atividade-pratica-c14/
 ├─ app/
 ├─ tests/
-├─ .github/workflows/
+├─ scripts/
+│  └─ notify.py
+├─ dist/
+├─ .github/
+│  └─ workflows/
+│     └─ ci.yml
 ├─ requirements.txt
 ├─ pyproject.toml
 └─ README.md
@@ -42,11 +47,22 @@ Os testes foram implementados com **pytest**, cobrindo:
 
 ## Pipeline
 
-A pipeline foi configurada com **GitHub Actions** e possui:
+A pipeline foi configurada com **GitHub Actions** e possui as seguintes etapas:
 
-- Execução automática dos testes  
-- Geração de relatório de testes (artifact)  
-- Build do projeto  
+- **test**: executa os testes automatizados do projeto  
+- **build**: gera os pacotes distribuíveis da aplicação  
+- **deploy**: simula a etapa de deploy após o build  
+- **notify**: envia uma notificação por e-mail com o resultado da pipeline  
+
+O fluxo da pipeline segue a ordem:
+
+**test → build → deploy → notify**
+
+Além disso, a pipeline inclui:
+
+- Execução automática a cada push e pull request  
+- Geração de artifact com relatório de testes  
+- Empacotamento do projeto para distribuição  
 
 ---
 
@@ -58,27 +74,33 @@ O projeto utiliza **build real em Python**, gerando pacotes distribuíveis com:
 python -m build
 ```
 
-Isso gera arquivos:
+Esse comando gera arquivos como:
 
 - `.whl`  
 - `.tar.gz`  
 
-💡 Em Python, o build não envolve compilação, mas sim empacotamento do projeto para distribuição.
+Em Python, o build não representa compilação como em linguagens compiladas, mas sim o empacotamento da aplicação para distribuição.
 
 ---
 
-## ▶️ Como executar
+## Como executar
 
-Instalar dependências:
+Instale as dependências com:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Rodar os testes:
+Execute os testes com:
 
 ```bash
 pytest
+```
+
+Para gerar o build do projeto:
+
+```bash
+python -m build
 ```
 
 ---
@@ -87,13 +109,12 @@ pytest
 
 - Python 3.11  
 - Pytest  
-- GitHub Actions  
-- Setuptools  
+- GitHub Actions
 
 ---
 
 ## Considerações finais
 
-Este projeto foi desenvolvido com foco em boas práticas de engenharia de software, incluindo organização de código, testes automatizados e integração contínua.
+Este projeto foi desenvolvido com foco em boas práticas de engenharia de software, incluindo organização de código, testes automatizados, integração contínua e automação de etapas do processo de entrega.
 
-A utilização de build real com `pyproject.toml` aproxima o projeto de um ambiente profissional.
+A utilização de `pyproject.toml` para build e a presença das etapas de **deploy** e **notify** aproximam o projeto de um cenário mais próximo do ambiente profissional.
