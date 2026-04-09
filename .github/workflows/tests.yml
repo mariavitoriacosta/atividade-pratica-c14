@@ -73,16 +73,16 @@ jobs:
     needs: [test, build] # so executa se test e build passarem
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # permissao necessaria para criar releases
     steps:
       - name: Baixar código do repositório
         uses: actions/checkout@v4
-
       - name: Baixar pacote gerado no build
         uses: actions/download-artifact@v4
         with:
           name: build-artifact
           path: dist/
-
       - name: Publicar no GitHub Releases
         uses: softprops/action-gh-release@v2
         with:
