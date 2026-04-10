@@ -2,7 +2,7 @@
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue)
 ![CI](https://img.shields.io/badge/CI-GitHub%20Actions-success)
-![Status](https://img.shields.io/badge/status-em%20desenvolvimento-yellow)
+![Status](https://img.shields.io/badge/status-concluído-brightgreen)
 
 Projeto desenvolvido na disciplina de Engenharia de Software com o objetivo de aplicar conceitos de testes automatizados, build e CI/CD.
 
@@ -110,6 +110,20 @@ python -m build
 - Python 3.11  
 - Pytest  
 - GitHub Actions
+
+---
+
+## Uso de Inteligência Artificial
+
+Algumas partes deste projeto contaram com o auxílio de ferramentas de IA generativa durante o desenvolvimento:
+
+| Parte | Ferramenta utilizada |
+|-------|----------------------|
+| Configuração do step de **build** na pipeline | ChatGPT |
+| Configuração do step de **deploy** na pipeline | ChatGPT |
+| Implementação do script de **notify** (`notify.py`) | Claude |
+
+As IAs foram utilizadas como apoio na escrita e estruturação do código, com revisão e adaptação manual para o contexto do projeto.
 
 ---
 
